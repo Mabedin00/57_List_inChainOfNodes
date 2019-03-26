@@ -51,9 +51,74 @@ public class List_inChainOfNodes{
       @return true, in keeping with conventions yet to be discussed
      */
      public boolean addAsHead( Object val) {
-         Node temp = headReference;
-         headReference = new Node(val, temp);
-
+        headReference = new Node( val, headReference);
         return true;
+     }
+
+     public boolean set(int index, Object val){
+         int counter = 0;
+         Node currentNode = headReference;
+         while (counter < size()){
+             if (counter == index -1){
+                 Node temp = currentNode.getReferenceToNextNode();
+                 Node newNode = new Node(val, temp.getReferenceToNextNode());
+                 currentNode.setReferenceToNextNode(newNode);
+                 return true;
+             }
+             counter++;
+             currentNode = currentNode.getReferenceToNextNode();
+         }
+         return true;
+
+     }
+
+     public Object get(int index){
+         int counter = 0;
+         Node currentNode = headReference;
+         while (counter < size()){
+             if (index == counter) return currentNode.getCargoReference();
+             currentNode = currentNode.getReferenceToNextNode();
+             counter++;
+         }
+         return null;
+     }
+
+     public boolean add(int index, Object val){
+         if (index == 0) this.addAsHead(val);
+         int counter = 0;
+         Node currentNode = headReference;
+         while (counter < size()){
+             if (index - 1 == counter){
+                 Node newNode = new Node(val, currentNode.getReferenceToNextNode());
+                 currentNode.setReferenceToNextNode(newNode);
+                 return true;
+             }
+             currentNode = currentNode.getReferenceToNextNode();
+             counter++;
+         }
+         return true;
+     }
+
+     public boolean remove(int index){
+         int counter = 0;
+         Node currentNode = headReference;
+         while (counter < size()){
+             if (index == 0){
+                headReference = headReference.getReferenceToNextNode();
+                return true;
+             }
+             else if (counter == index -1){
+                 Node temp = currentNode.getReferenceToNextNode();
+                 currentNode.setReferenceToNextNode(temp.getReferenceToNextNode());
+                 return true;
+             }
+             else if (index == size() - 1 && counter == index - 1){
+                 currentNode.setReferenceToNextNode(null);
+                 return true;
+             }
+             currentNode = currentNode.getReferenceToNextNode();
+             counter++;
+         }
+         return true;
      }
 }
