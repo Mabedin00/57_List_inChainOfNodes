@@ -28,8 +28,7 @@ public class UserOfList {
 
         //set()
 
-        list.set(2,"a");
-        System.out.println("changed list: " + list);
+        System.out.println("set changed list the value " + list.set(2,"a") + " to form " + list);
 
         //get()
         System.out.println(list.get(2));
